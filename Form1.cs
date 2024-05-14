@@ -1,4 +1,9 @@
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Diagnostics;
 using System.Globalization;
+using System.Text.Json;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace 日曆
 {
@@ -11,45 +16,43 @@ namespace 日曆
         }
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
-            // 獲取所選日期
+            // 获取所选日期
             DateTime selectedDate = monthCalendar1.SelectionStart;
-            DateTime today = DateTime.Today;
 
-            if (selectedDate.Date == today)
+
+
+            // 检查是否有日记文件
+            if (DairyManager.DiaryExists(selectedDate))
             {
-                // 如果是今天，則打開日記視窗
-                OpenDiaryForm(selectedDate);
+                diarycs diarycs = new diarycs(this, selectedDate);
+                diarycs.Owner = this;
+                // 如果存在日记文件，则打开现有日记窗口
+                diarycs.OpenDiaryForm(selectedDate);
+                diarycs.ShowDialog();
             }
             else
             {
-                // 否則檢查是否有日記內容
-                string diaryContent = DiaryManager.GetDiaryContent(selectedDate);
-                if (string.IsNullOrEmpty(diaryContent))
-                {
-                    // 如果有日記內容，則打開日記視窗
-                    OpenDiaryForm(selectedDate);
-                }
-                else
-                {
-                    MessageBox.Show("該日期沒有日記內容。");
-                }
+                // 如果不存在日记文件，则打开新的日记窗口
+                OpenNewDiaryForm(selectedDate);
             }
-
         }
-        private void OpenDiaryForm(DateTime date)
+
+        private void OpenNewDiaryForm(DateTime selectedDate)
         {
-            diarycs diaryForm = new diarycs(this, date);
+            diarycs diaryForm = new diarycs(this, selectedDate);
             diaryForm.Owner = this;
             // 設置 diaryForm 的 dateTimePicker1 控件的值為所選日期
-            diaryForm.SetDateTimePickerValue(date);
+            diaryForm.SetDateTimePickerValue(selectedDate);
             diaryForm.ShowDialog();
-
         }
+
 
         // 假設 DiaryManager 是用於管理日記內容的類別
         public static class DiaryManager
         {
             private static Dictionary<DateTime, string> diaryEntries = new Dictionary<DateTime, string>();
+
+            public static string DiariesFolder { get; internal set; }
 
             // 假設 GetDiaryContent 方法用於根據日期獲取日記內容
             public static string GetDiaryContent(DateTime date)
@@ -72,6 +75,13 @@ namespace 日曆
                 // 假設 diaryEntries 是一個字典，保存了日期與日記內容的對應關係
                 diaryEntries[date] = content;
             }
+        }
+
+        private void accountingbutton_Click(object sender, EventArgs e)
+        {
+            Form2 accountingForm = new Form2(DateTime.Now);
+            accountingForm.Show();
+
         }
     }
 }

@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="日曆.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WindowPositionX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="WindowPositionY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="WindowWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">77</Value>
+    </Setting>
+    <Setting Name="WindowHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">38</Value>
+    </Setting>
+    <Setting Name="Date" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Mood" Type="System.String" Scope="User">
+      <Value Profile="(Default)">初始心情</Value>
+    </Setting>
+    <Setting Name="Weather" Type="System.String" Scope="User">
+      <Value Profile="(Default)">初始天氣</Value>
+    </Setting>
+    <Setting Name="Content" Type="System.String" Scope="User">
+      <Value Profile="(Default)">初始文本內容</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

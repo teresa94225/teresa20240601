@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             monthCalendar1 = new MonthCalendar();
+            accountingbutton = new Button();
             SuspendLayout();
             // 
             // monthCalendar1
@@ -39,11 +40,22 @@
             monthCalendar1.DateChanged += monthCalendar1_DateSelected;
             monthCalendar1.DateSelected += monthCalendar1_DateSelected;
             // 
+            // accountingbutton
+            // 
+            accountingbutton.Location = new Point(613, 46);
+            accountingbutton.Name = "accountingbutton";
+            accountingbutton.Size = new Size(94, 29);
+            accountingbutton.TabIndex = 1;
+            accountingbutton.Text = "記帳";
+            accountingbutton.UseVisualStyleBackColor = true;
+            accountingbutton.Click += accountingbutton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(accountingbutton);
             Controls.Add(monthCalendar1);
             Name = "Form1";
             Text = "Form1";
@@ -53,5 +65,6 @@
         #endregion
 
         private MonthCalendar monthCalendar1;
+        private Button accountingbutton;
     }
 }

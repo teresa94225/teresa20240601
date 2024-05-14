@@ -86,6 +86,7 @@ namespace 日曆
             savebutton.TabIndex = 4;
             savebutton.Text = "儲存";
             savebutton.UseVisualStyleBackColor = true;
+            savebutton.Click += savebutton_Click;
             // 
             // context
             // 
@@ -96,6 +97,7 @@ namespace 日曆
             context.Size = new Size(781, 608);
             context.TabIndex = 5;
             context.Text = "";
+            
             // 
             // weathercomboBox
             // 

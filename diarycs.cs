@@ -10,21 +10,27 @@ using System.Drawing.Drawing2D;
 using System.Text;
 using System.Globalization;
 using static 日曆.Form1;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace 日曆
 {
     public partial class diarycs : Form
     {
-
-
+        private DateTime selectedDate;
+        private List<PictureBox> pictureBoxes = new List<PictureBox>();
+        
         public diarycs(Form1 mainForm, DateTime diaryDate)
         {
 
             InitializeComponent();
-
-
-
-
+            selectedDate = diaryDate;
+            pictureBoxes.Add(pictureBox1);
+            pictureBoxes.Add(pictureBox2);
+            pictureBoxes.Add(pictureBox3);
+            pictureBoxes.Add(pictureBox4);
+            pictureBoxes.Add(pictureBox5);
+            pictureBoxes.Add(pictureBox6);
             this.Controls.Add(pictureBox2);
             pictureBox2.Hide();
             button2.Hide();
@@ -118,6 +124,8 @@ namespace 日曆
                     totalphoto++;
                     emptyPictureBox.Image = Image.FromFile(selectedImagePath);
                 }
+                
+
             }
         }
 
@@ -524,6 +532,7 @@ namespace 日曆
                     button3.Hide();
                     button2.Hide();
                 }
+                
             }
         }
 
@@ -545,11 +554,92 @@ namespace 日曆
             }
         }
 
-        
+
         public void SetDateTimePickerValue(DateTime date)
         {
             dateTimePicker1.Value = date;
         }
+
+        private void savebutton_Click(object sender, EventArgs e)
+        {
+            // 创建日记条目对象
+            DiaryEntry entry = new DiaryEntry
+            {
+                Date = dateTimePicker1.Value,
+                Mood = moodcomboBox.SelectedItem?.ToString(),
+                Weather = weathercomboBox.SelectedItem?.ToString(),
+                Context = context.Text,
+                PhotoFileNames = new List<string>()
+                // 还需要添加照片路径的逻辑，例如：entry.PhotoPaths = GetPhotoPaths();
+            };
+            for (int i = 0; i < pictureBoxes.Count; i++)
+            {
+                PictureBox pictureBox = pictureBoxes[i];
+                if (pictureBox.Image != null)
+                {
+                    string photoFileName = $"{entry.Date.ToString("yyyy-MM-dd")}_photo{i + 1}.jpg"; // 图片编号从 1 开始
+                    string photoFilePath = Path.Combine(DairyManager.DiariesFolder, "photos", photoFileName);
+                    pictureBox.Image.Save(photoFilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    entry.PhotoFileNames.Add(photoFileName); // 将照片文件名添加到 PhotoFileNames 列表中
+                }
+            }
+            // 调用 DairyManager 中的 SaveDiary 方法保存日记
+            DairyManager.SaveToFile(entry, selectedDate);
+            // 提示用户保存成功或其他操作
+            MessageBox.Show("日记保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public void OpenDiaryForm(DateTime selectedDate)
+        {
+            
+            // 生成文件名（可以使用日期作为文件名）
+            string fileName = selectedDate.ToString("yyyy-MM-dd") + ".json";
+
+            // 创建文件路径
+            string filePath = Path.Combine(DairyManager.DiariesFolder, fileName); // DiariesFolder 包含了 diaries 文件夹
+
+            try
+            {
+                // 读取 JSON 文件内容
+                string json = File.ReadAllText(filePath);
+
+                // 将 JSON 反序列化为 DiaryEntry 对象
+                DiaryEntry diaryEntry = JsonConvert.DeserializeObject<DiaryEntry>(json);
+                
+                //MessageBox.Show($"日期: {diaryEntry.Date}, 内容: {diaryEntry.Context}, 心情: {diaryEntry.Mood}, 天气: {diaryEntry.Weather}");
+                
+                dateTimePicker1.Value = diaryEntry.Date;
+                moodcomboBox.SelectedItem = diaryEntry.Mood;
+                weathercomboBox.SelectedItem = diaryEntry.Weather;
+                context.Text = diaryEntry.Context;
+
+
+
+                for (int i = 1; i < diaryEntry.PhotoFileNames.Count; i++)
+                {
+                    string photoFileName = $"{selectedDate.Date.ToString("yyyy-MM-dd")}_photo-{i + 1}.jpg";
+                    string photoFilePath = Path.Combine(DairyManager.DiariesFolder, "photos", photoFileName);
+                    if (File.Exists(photoFilePath))
+                    {
+                        Image image = Image.FromFile(photoFilePath);
+                        pictureBoxes[i].Show();
+                        pictureBoxes[i + 1].Show();
+                        pictureBoxes[i].Image = image;
+                        Controls[$"button{i + 1}"].Show();
+                    }
+                    else
+                    {
+                        pictureBoxes[i].Image = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"打开 JSON 文件时出错: {ex.Message}");
+            }
+        }
+
+       
     }
 }
 
