@@ -12,6 +12,7 @@ using System.Globalization;
 using static 日曆.Form1;
 using System.Text.Json;
 using Newtonsoft.Json;
+using static 日曆.choice;
 
 namespace 日曆
 {
@@ -19,8 +20,8 @@ namespace 日曆
     {
         private DateTime selectedDate;
         private List<PictureBox> pictureBoxes = new List<PictureBox>();
-        
-        public diarycs(Form1 mainForm, DateTime diaryDate)
+
+        public diarycs(DateTime diaryDate)
         {
 
             InitializeComponent();
@@ -124,7 +125,7 @@ namespace 日曆
                     totalphoto++;
                     emptyPictureBox.Image = Image.FromFile(selectedImagePath);
                 }
-                
+
 
             }
         }
@@ -135,6 +136,7 @@ namespace 日曆
             DialogResult result = MessageBox.Show("確定要移除照片嗎？", "移除照片", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+
                 totalphoto--;
                 pictureBox1.Image = null;
                 pictureBox1.Image = pictureBox2.Image;
@@ -206,6 +208,7 @@ namespace 日曆
             DialogResult result = MessageBox.Show("確定要移除照片嗎？", "移除照片", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+
                 totalphoto--;
                 pictureBox2.Image = null;
                 pictureBox2.Image = pictureBox3.Image;
@@ -275,6 +278,7 @@ namespace 日曆
             DialogResult result = MessageBox.Show("確定要移除照片嗎？", "移除照片", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+
                 totalphoto--;
                 pictureBox3.Image = null;
                 pictureBox3.Image = pictureBox4.Image;
@@ -343,6 +347,7 @@ namespace 日曆
             DialogResult result = MessageBox.Show("確定要移除照片嗎？", "移除照片", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+
                 totalphoto--;
                 pictureBox4.Image = null;
                 pictureBox4.Image = pictureBox5.Image;
@@ -407,9 +412,11 @@ namespace 日曆
 
         private void button5_Click(object sender, EventArgs e)
         {
+
             DialogResult result = MessageBox.Show("確定要移除照片嗎？", "移除照片", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+
                 totalphoto--;
                 pictureBox5.Image = null;
                 pictureBox5.Image = pictureBox6.Image;
@@ -473,9 +480,11 @@ namespace 日曆
 
         private void button6_Click(object sender, EventArgs e)
         {
+
             DialogResult result = MessageBox.Show("確定要移除照片嗎？", "移除照片", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+
                 totalphoto--;
                 pictureBox6.Image = null;
                 if (totalphoto == 5)
@@ -532,27 +541,11 @@ namespace 日曆
                     button3.Hide();
                     button2.Hide();
                 }
-                
+
             }
         }
 
-        private void ChangeColorButton_Click(object sender, EventArgs e)
-        {
-            ColorDialog colorDialog = new ColorDialog();
 
-            if (colorDialog.ShowDialog() == DialogResult.OK)
-            {
-                // 設定視窗的背景色為水平漸層
-                this.BackColor = Color.White; // 起始顏色，這裡假設是白色
-                this.Paint += (s, pe) =>
-                {
-                    using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, Color.White, colorDialog.Color, LinearGradientMode.Horizontal))
-                    {
-                        pe.Graphics.FillRectangle(brush, this.ClientRectangle);
-                    }
-                };
-            }
-        }
 
 
         public void SetDateTimePickerValue(DateTime date)
@@ -562,6 +555,7 @@ namespace 日曆
 
         private void savebutton_Click(object sender, EventArgs e)
         {
+            
             // 创建日记条目对象
             DiaryEntry entry = new DiaryEntry
             {
@@ -569,6 +563,7 @@ namespace 日曆
                 Mood = moodcomboBox.SelectedItem?.ToString(),
                 Weather = weathercomboBox.SelectedItem?.ToString(),
                 Context = context.Text,
+                SelectedColor = selectedColor,// 儲存選擇的顏色
                 PhotoFileNames = new List<string>()
                 // 还需要添加照片路径的逻辑，例如：entry.PhotoPaths = GetPhotoPaths();
             };
@@ -577,10 +572,18 @@ namespace 日曆
                 PictureBox pictureBox = pictureBoxes[i];
                 if (pictureBox.Image != null)
                 {
-                    string photoFileName = $"{entry.Date.ToString("yyyy-MM-dd")}_photo{i + 1}.jpg"; // 图片编号从 1 开始
-                    string photoFilePath = Path.Combine(DairyManager.DiariesFolder, "photos", photoFileName);
-                    pictureBox.Image.Save(photoFilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    entry.PhotoFileNames.Add(photoFileName); // 将照片文件名添加到 PhotoFileNames 列表中
+                    try
+                    {
+                        string photoFileName = $"{entry.Date.ToString("yyyy-MM-dd")}_photo{(i + 1):00}.jpg"; // 图片编号从 01 开始，保证两位数
+                        string photoFilePath = Path.Combine(DairyManager.DiariesFolder, selectedDate.ToString("yyyy-MM-dd"), photoFileName);
+                        pictureBox.Image.Save(photoFilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        entry.PhotoFileNames.Add(photoFileName); // 将照片文件名添加到 PhotoFileNames 列表中
+                    }
+                    catch (Exception ex)
+                    {
+                        // 保存失败，可以根据实际情况处理异常或者进行相应的提示
+                        MessageBox.Show($"保存照片失败：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             // 调用 DairyManager 中的 SaveDiary 方法保存日记
@@ -591,12 +594,13 @@ namespace 日曆
 
         public void OpenDiaryForm(DateTime selectedDate)
         {
-            
+            button1.Hide();
+            addbutton.Hide();
             // 生成文件名（可以使用日期作为文件名）
             string fileName = selectedDate.ToString("yyyy-MM-dd") + ".json";
 
             // 创建文件路径
-            string filePath = Path.Combine(DairyManager.DiariesFolder, fileName); // DiariesFolder 包含了 diaries 文件夹
+            string filePath = Path.Combine(DairyManager.DiariesFolder, selectedDate.ToString("yyyy-MM-dd"), fileName); // DiariesFolder 包含了 diaries 文件夹
 
             try
             {
@@ -605,31 +609,24 @@ namespace 日曆
 
                 // 将 JSON 反序列化为 DiaryEntry 对象
                 DiaryEntry diaryEntry = JsonConvert.DeserializeObject<DiaryEntry>(json);
-                
-                //MessageBox.Show($"日期: {diaryEntry.Date}, 内容: {diaryEntry.Context}, 心情: {diaryEntry.Mood}, 天气: {diaryEntry.Weather}");
-                
+
                 dateTimePicker1.Value = diaryEntry.Date;
                 moodcomboBox.SelectedItem = diaryEntry.Mood;
                 weathercomboBox.SelectedItem = diaryEntry.Weather;
                 context.Text = diaryEntry.Context;
+                BackColor = diaryEntry.SelectedColor;
 
 
 
-                for (int i = 1; i < diaryEntry.PhotoFileNames.Count; i++)
+                for (int i = 0; i < diaryEntry.PhotoFileNames.Count; i++)
                 {
-                    string photoFileName = $"{selectedDate.Date.ToString("yyyy-MM-dd")}_photo-{i + 1}.jpg";
-                    string photoFilePath = Path.Combine(DairyManager.DiariesFolder, "photos", photoFileName);
+                    string photoFileName = diaryEntry.PhotoFileNames[i];
+                    string photoFilePath = Path.Combine(DairyManager.DiariesFolder, selectedDate.ToString("yyyy-MM-dd"), photoFileName);
                     if (File.Exists(photoFilePath))
                     {
                         Image image = Image.FromFile(photoFilePath);
-                        pictureBoxes[i].Show();
-                        pictureBoxes[i + 1].Show();
+                        pictureBoxes[i].Show(); // 显示对应的 PictureBox
                         pictureBoxes[i].Image = image;
-                        Controls[$"button{i + 1}"].Show();
-                    }
-                    else
-                    {
-                        pictureBoxes[i].Image = null;
                     }
                 }
             }
@@ -639,7 +636,27 @@ namespace 日曆
             }
         }
 
-       
+
+        public Color selectedColor;
+        public void colorbutton_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                selectedColor = colorDialog.Color;
+                // 設定視窗的背景色為水平漸層
+                this.BackColor = Color.White; // 起始顏色，這裡假設是白色
+                this.Paint += (s, pe) =>
+                {
+                    using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, Color.White, colorDialog.Color, LinearGradientMode.Horizontal))
+                    {
+                        pe.Graphics.FillRectangle(brush, this.ClientRectangle);
+                    }
+                };
+            }
+
+        }
     }
 }
 

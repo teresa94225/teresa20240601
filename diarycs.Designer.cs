@@ -50,7 +50,7 @@ namespace 日曆
             pictureBox6 = new PictureBox();
             button5 = new Button();
             button6 = new Button();
-            ChangeColorButton = new Button();
+            colorbutton = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -97,7 +97,6 @@ namespace 日曆
             context.Size = new Size(781, 608);
             context.TabIndex = 5;
             context.Text = "";
-            
             // 
             // weathercomboBox
             // 
@@ -263,15 +262,16 @@ namespace 日曆
             button6.UseVisualStyleBackColor = true;
             button6.Click += button6_Click;
             // 
-            // ChangeColorButton
+            // colorbutton
             // 
-            ChangeColorButton.Location = new Point(1190, 44);
-            ChangeColorButton.Name = "ChangeColorButton";
-            ChangeColorButton.Size = new Size(100, 50);
-            ChangeColorButton.TabIndex = 16;
-            ChangeColorButton.Text = "color";
-            ChangeColorButton.UseVisualStyleBackColor = true;
-            ChangeColorButton.Click += ChangeColorButton_Click;
+            colorbutton.Font = new Font("Microsoft JhengHei UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            colorbutton.Location = new Point(1204, 43);
+            colorbutton.Name = "colorbutton";
+            colorbutton.Size = new Size(82, 49);
+            colorbutton.TabIndex = 25;
+            colorbutton.Text = "color";
+            colorbutton.UseVisualStyleBackColor = true;
+            colorbutton.Click += colorbutton_Click;
             // 
             // diarycs
             // 
@@ -279,6 +279,7 @@ namespace 日曆
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new Size(1374, 710);
+            Controls.Add(colorbutton);
             Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(pictureBox6);
@@ -298,7 +299,6 @@ namespace 日曆
             Controls.Add(savebutton);
             Controls.Add(moodcomboBox);
             Controls.Add(dateTimePicker1);
-            Controls.Add(ChangeColorButton);
             Name = "diarycs";
             Text = "Diary";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -332,7 +332,6 @@ namespace 日曆
         private PictureBox pictureBox6;
         private Button button5;
         private Button button6;
-        private Button ChangeColorButton;
-
+        private Button colorbutton;
     }
 }

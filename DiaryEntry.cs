@@ -12,6 +12,8 @@ namespace 日曆
         public string Mood { get; set; }
         public string Weather { get; set; }
         public string Context { get; set; }
+
+        public Color SelectedColor { get; set; } // 新增顏色屬性
         public List<string> PhotoFileNames { get; set; }
 
         public override string ToString()
