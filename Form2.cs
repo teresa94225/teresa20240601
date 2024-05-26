@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Linq;
+using System.Windows.Forms;
 using Newtonsoft.Json;
-using System.Xml.Linq;
 
 namespace 日曆
 {
@@ -11,11 +10,13 @@ namespace 日曆
     {
         private DateTime _selectedDate;
         private List<Expense> expenses = new List<Expense>();
+
         public Form2(DateTime selectedDate)
         {
             InitializeComponent();
             _selectedDate = selectedDate;
-            dateTimePicker1.Value = selectedDate; // 設置日期選擇器的值為選擇的日期
+            dateTimePicker1.Value = selectedDate; // 设置日期选择器的值为选择的日期
+            OpenaccountingForm(_selectedDate); // 加载现有的记账数据
         }
 
         private void addAccountButton_Click(object sender, EventArgs e)
@@ -38,16 +39,6 @@ namespace 日曆
             }
         }
 
-
-        private void balanceQueryButton_Click(object sender, EventArgs e)
-        {
-            decimal dailyTotal = expenses
-                .Where(expense => expense.Date.Date == _selectedDate.Date)
-                .Sum(expense => expense.Amount);
-
-            MessageBox.Show($"當日總開銷: {dailyTotal:C}");
-        }
-
         private void UpdateDataGridView()
         {
             accountsDataGridView.Rows.Clear();
@@ -56,8 +47,6 @@ namespace 日曆
                 accountsDataGridView.Rows.Add(expense.Name, expense.Amount);
             }
         }
-
-
 
         private void calculateButton_Click(object sender, EventArgs e)
         {
@@ -70,23 +59,6 @@ namespace 日曆
                 }
             }
             MessageBox.Show("總和：" + total.ToString("C"), "總和", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            double totalAmount = 0.0;
-            foreach (DataGridViewRow row in accountsDataGridView.Rows)
-            {
-                if (!row.IsNewRow && row.Cells["Amount"].Value != null)
-                {
-                    if (double.TryParse(row.Cells["Amount"].Value.ToString(), out double amount))
-                    {
-                        // 將成功轉換的值添加到總和
-                        totalAmount += amount;
-                    }
-                    else
-                    {
-                        // 轉換失敗，您可以在這裡處理錯誤情況
-                        MessageBox.Show($"無法將 '{row.Cells["Amount"].Value}' 解析為有效的數字。", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
         }
 
         private void savebutton_Click(object sender, EventArgs e)
@@ -95,44 +67,50 @@ namespace 日曆
 
             foreach (DataGridViewRow row in accountsDataGridView.Rows)
             {
-                if (!row.IsNewRow) // 確保不包含新的空白行
+                if (!row.IsNewRow)
                 {
                     accountingentery entry = new accountingentery
                     {
                         Date = dateTimePicker1.Value,
-                        ExpenseName = row.Cells["NameColumn"].Value.ToString(), // 假設名稱欄位的名稱是 "ColumnName"
-                        Amount = Convert.ToDecimal(row.Cells["Amount"].Value) // 假設金額欄位的名稱是 "ColumnAmount"
+                        ExpenseName = row.Cells["NameColumn"].Value.ToString(),
+                        Amount = Convert.ToDecimal(row.Cells["Amount"].Value)
                     };
                     accountingEntries.Add(entry);
                 }
             }
-            // 调用 DairyManager 中的 SaveDiary 方法保存日记
+
             DairyManager.accoutingSaveToFile(accountingEntries, _selectedDate);
-            // 提示用户保存成功或其他操作
-            MessageBox.Show("日记保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("記賬保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-
-        public void OpenaccountingForm(DateTime _selectedDate)
+        public void OpenaccountingForm(DateTime selectedDate)
         {
-            // 生成文件名（可以使用日期作为文件名）
-            string fileName = _selectedDate.ToString("yyyy-MM-dd") + ".json";
-
-            // 创建文件路径
-            string filePath = Path.Combine(DairyManager.accountingFolder, fileName); // DiariesFolder 包含了 diaries 文件夹
+            string fileName = selectedDate.ToString("yyyy-MM-dd") + ".json";
+            string filePath = Path.Combine(DairyManager.accountingFolder, fileName);
 
             try
             {
-                // 读取 JSON 文件内容
-                string json = File.ReadAllText(filePath);
-
-                // 将 JSON 反序列化为 accountingentery 对象的列表
-                List<accountingentery> entries = JsonConvert.DeserializeObject<List<accountingentery>>(json);
-
-                // 将反序列化的条目加载到 DataGridView 中
-                foreach (var entry in entries)
+                if (File.Exists(filePath))
                 {
-                    accountsDataGridView.Rows.Add(entry.ExpenseName, entry.Amount);
+                    string json = File.ReadAllText(filePath);
+                    List<accountingentery> entries = JsonConvert.DeserializeObject<List<accountingentery>>(json);
+
+                    // 清空现有数据
+                    expenses.Clear();
+                    accountsDataGridView.Rows.Clear();
+
+                    foreach (var entry in entries)
+                    {
+                        accountsDataGridView.Rows.Add(entry.ExpenseName, entry.Amount);
+                    }
+
+                    expenses = entries.Select(entry => new Expense(entry.ExpenseName, entry.Amount, entry.Date)).ToList();
+                }
+                else
+                {
+                    // 如果文件不存在，清空现有数据
+                    expenses.Clear();
+                    accountsDataGridView.Rows.Clear();
                 }
             }
             catch (Exception ex)
@@ -141,6 +119,27 @@ namespace 日曆
             }
         }
 
-        
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            _selectedDate = dateTimePicker1.Value;
+            OpenaccountingForm(_selectedDate);
+        }
+
+        private void deletebutton1_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in accountsDataGridView.SelectedRows)
+            {
+                if (!row.IsNewRow)
+                {
+                    accountsDataGridView.Rows.Remove(row);
+                }
+            }
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            accountNameTextBox.Text = string.Empty;
+            initialBalanceTextBox.Text = string.Empty;
+        }
     }
 }

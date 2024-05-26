@@ -1,4 +1,6 @@
-﻿namespace 日曆
+﻿using System;
+
+namespace 日曆
 {
     internal class Expense
     {

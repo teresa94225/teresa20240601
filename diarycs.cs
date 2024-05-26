@@ -1,18 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
-using System.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using ComboBox = System.Windows.Forms.ComboBox;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
-using System.Drawing.Drawing2D;
-using System.Text;
-using System.Globalization;
-using static 日曆.Form1;
-using System.Text.Json;
 using Newtonsoft.Json;
-using static 日曆.choice;
 
 namespace 日曆
 {
@@ -23,7 +15,6 @@ namespace 日曆
 
         public diarycs(DateTime diaryDate)
         {
-
             InitializeComponent();
             selectedDate = diaryDate;
             pictureBoxes.Add(pictureBox1);
@@ -32,13 +23,14 @@ namespace 日曆
             pictureBoxes.Add(pictureBox4);
             pictureBoxes.Add(pictureBox5);
             pictureBoxes.Add(pictureBox6);
+
             this.Controls.Add(pictureBox2);
             pictureBox2.Hide();
             button2.Hide();
             this.Controls.Add(pictureBox3);
             pictureBox3.Hide();
             button3.Hide();
-            this.Controls.Add(pictureBox3);
+            this.Controls.Add(pictureBox4);
             pictureBox4.Hide();
             button4.Hide();
             this.Controls.Add(pictureBox5);
@@ -103,7 +95,6 @@ namespace 日曆
                     totalphoto++;
                     pictureBox5.Show();
                     button4.Show();
-
                 }
                 else if (pictureBox5.Image == null)
                 {
@@ -111,32 +102,26 @@ namespace 日曆
                     totalphoto++;
                     pictureBox6.Show();
                     button5.Show();
-
                 }
                 else if (pictureBox6.Image == null)
                 {
                     totalphoto++;
                     pictureBox6.Image = Image.FromFile(selectedImagePath);
                     button6.Show();
-
                 }
                 else
                 {
                     totalphoto++;
                     emptyPictureBox.Image = Image.FromFile(selectedImagePath);
                 }
-
-
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             DialogResult result = MessageBox.Show("確定要移除照片嗎？", "移除照片", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-
                 totalphoto--;
                 pictureBox1.Image = null;
                 pictureBox1.Image = pictureBox2.Image;
@@ -145,62 +130,8 @@ namespace 日曆
                 pictureBox4.Image = pictureBox5.Image;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                if (totalphoto == 5)
-                {
-                    pictureBox6.Show();
-                }
-                if (totalphoto == 4)
-                {
-                    pictureBox5.Show();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                }
-                if (totalphoto == 3)
-                {
-                    pictureBox4.Show();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                }
-                if (totalphoto == 2)
-                {
-                    pictureBox3.Show();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                }
-                if (totalphoto == 1)
-                {
-                    pictureBox2.Show();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                }
-                if (totalphoto == 0)
-                {
-                    pictureBox1.Show();
-                    pictureBox2.Hide();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                    button2.Hide();
-                }
+                UpdatePictureBoxVisibility();
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -208,7 +139,6 @@ namespace 日曆
             DialogResult result = MessageBox.Show("確定要移除照片嗎？", "移除照片", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-
                 totalphoto--;
                 pictureBox2.Image = null;
                 pictureBox2.Image = pictureBox3.Image;
@@ -216,60 +146,7 @@ namespace 日曆
                 pictureBox4.Image = pictureBox5.Image;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                if (totalphoto == 5)
-                {
-                    pictureBox6.Show();
-                }
-                if (totalphoto == 4)
-                {
-                    pictureBox5.Show();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                }
-                if (totalphoto == 3)
-                {
-                    pictureBox4.Show();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                }
-                if (totalphoto == 2)
-                {
-                    pictureBox3.Show();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                }
-                if (totalphoto == 1)
-                {
-                    pictureBox2.Show();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                }
-                if (totalphoto == 0)
-                {
-                    pictureBox1.Show();
-                    pictureBox2.Hide();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                    button2.Hide();
-                }
+                UpdatePictureBoxVisibility();
             }
         }
 
@@ -278,67 +155,13 @@ namespace 日曆
             DialogResult result = MessageBox.Show("確定要移除照片嗎？", "移除照片", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-
                 totalphoto--;
                 pictureBox3.Image = null;
                 pictureBox3.Image = pictureBox4.Image;
                 pictureBox4.Image = pictureBox5.Image;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                if (totalphoto == 5)
-                {
-                    pictureBox6.Show();
-                }
-                if (totalphoto == 4)
-                {
-                    pictureBox5.Show();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                }
-                if (totalphoto == 3)
-                {
-                    pictureBox4.Show();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                }
-                if (totalphoto == 2)
-                {
-                    pictureBox3.Show();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                }
-                if (totalphoto == 1)
-                {
-                    pictureBox2.Show();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                }
-                if (totalphoto == 0)
-                {
-                    pictureBox1.Show();
-                    pictureBox2.Hide();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                    button2.Hide();
-                }
+                UpdatePictureBoxVisibility();
             }
         }
 
@@ -347,206 +170,48 @@ namespace 日曆
             DialogResult result = MessageBox.Show("確定要移除照片嗎？", "移除照片", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-
                 totalphoto--;
                 pictureBox4.Image = null;
                 pictureBox4.Image = pictureBox5.Image;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                if (totalphoto == 5)
-                {
-                    pictureBox6.Show();
-                }
-                if (totalphoto == 4)
-                {
-                    pictureBox5.Show();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                }
-                if (totalphoto == 3)
-                {
-                    pictureBox4.Show();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                }
-                if (totalphoto == 2)
-                {
-                    pictureBox3.Show();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                }
-                if (totalphoto == 1)
-                {
-                    pictureBox2.Show();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                }
-                if (totalphoto == 0)
-                {
-                    pictureBox1.Show();
-                    pictureBox2.Hide();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                    button2.Hide();
-                }
+                UpdatePictureBoxVisibility();
             }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-
             DialogResult result = MessageBox.Show("確定要移除照片嗎？", "移除照片", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-
                 totalphoto--;
                 pictureBox5.Image = null;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                if (totalphoto == 5)
-                {
-                    pictureBox6.Show();
-                }
-                if (totalphoto == 4)
-                {
-                    pictureBox5.Show();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                }
-                if (totalphoto == 3)
-                {
-                    pictureBox4.Show();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                }
-                if (totalphoto == 2)
-                {
-                    pictureBox3.Show();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                }
-                if (totalphoto == 1)
-                {
-                    pictureBox2.Show();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                }
-                if (totalphoto == 0)
-                {
-                    pictureBox1.Show();
-                    pictureBox2.Hide();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                    button2.Hide();
-                }
+                UpdatePictureBoxVisibility();
             }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-
             DialogResult result = MessageBox.Show("確定要移除照片嗎？", "移除照片", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-
                 totalphoto--;
                 pictureBox6.Image = null;
-                if (totalphoto == 5)
-                {
-                    pictureBox6.Show();
-                }
-                if (totalphoto == 4)
-                {
-                    pictureBox5.Show();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                }
-                if (totalphoto == 3)
-                {
-                    pictureBox4.Show();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                }
-                if (totalphoto == 2)
-                {
-                    pictureBox3.Show();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                }
-                if (totalphoto == 1)
-                {
-                    pictureBox2.Show();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                }
-                if (totalphoto == 0)
-                {
-                    pictureBox1.Show();
-                    pictureBox2.Hide();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                    button2.Hide();
-                }
-
+                UpdatePictureBoxVisibility();
             }
         }
 
-
-
+        private void UpdatePictureBoxVisibility()
+        {
+            if (totalphoto >= 6) { pictureBox6.Show(); button6.Show(); } else { pictureBox6.Hide(); button6.Hide(); }
+            if (totalphoto >= 5) { pictureBox5.Show(); button5.Show(); } else { pictureBox5.Hide(); button5.Hide(); }
+            if (totalphoto >= 4) { pictureBox4.Show(); button4.Show(); } else { pictureBox4.Hide(); button4.Hide(); }
+            if (totalphoto >= 3) { pictureBox3.Show(); button3.Show(); } else { pictureBox3.Hide(); button3.Hide(); }
+            if (totalphoto >= 2) { pictureBox2.Show(); button2.Show(); } else { pictureBox2.Hide(); button2.Hide(); }
+            if (totalphoto >= 1) { pictureBox1.Show(); button1.Show(); } else { pictureBox1.Hide(); button1.Hide(); }
+        }
 
         public void SetDateTimePickerValue(DateTime date)
         {
@@ -555,7 +220,6 @@ namespace 日曆
 
         private void savebutton_Click(object sender, EventArgs e)
         {
-            
             // 创建日记条目对象
             DiaryEntry entry = new DiaryEntry
             {
@@ -563,10 +227,10 @@ namespace 日曆
                 Mood = moodcomboBox.SelectedItem?.ToString(),
                 Weather = weathercomboBox.SelectedItem?.ToString(),
                 Context = context.Text,
-                SelectedColor = selectedColor,// 儲存選擇的顏色
+                SelectedColor = selectedColor,
                 PhotoFileNames = new List<string>()
-                // 还需要添加照片路径的逻辑，例如：entry.PhotoPaths = GetPhotoPaths();
             };
+
             for (int i = 0; i < pictureBoxes.Count; i++)
             {
                 PictureBox pictureBox = pictureBoxes[i];
@@ -574,59 +238,68 @@ namespace 日曆
                 {
                     try
                     {
-                        string photoFileName = $"{entry.Date.ToString("yyyy-MM-dd")}_photo{(i + 1):00}.jpg"; // 图片编号从 01 开始，保证两位数
+                        string photoFileName = $"{entry.Date.ToString("yyyy-MM-dd")}_photo{(i + 1):00}.jpg";
                         string photoFilePath = Path.Combine(DairyManager.DiariesFolder, selectedDate.ToString("yyyy-MM-dd"), photoFileName);
                         pictureBox.Image.Save(photoFilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
-                        entry.PhotoFileNames.Add(photoFileName); // 将照片文件名添加到 PhotoFileNames 列表中
+                        entry.PhotoFileNames.Add(photoFileName);
                     }
                     catch (Exception ex)
                     {
-                        // 保存失败，可以根据实际情况处理异常或者进行相应的提示
                         MessageBox.Show($"保存照片失败：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
-            // 调用 DairyManager 中的 SaveDiary 方法保存日记
+
             DairyManager.SaveToFile(entry, selectedDate);
-            // 提示用户保存成功或其他操作
             MessageBox.Show("日记保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void OpenDiaryForm(DateTime selectedDate)
         {
-            button1.Hide();
-            addbutton.Hide();
+            // 清空现有数据
+            moodcomboBox.SelectedItem = null;
+            weathercomboBox.SelectedItem = null;
+            context.Text = string.Empty;
+            foreach (var pictureBox in pictureBoxes)
+            {
+                pictureBox.Image = null;
+                pictureBox.Hide();
+            }
+            BackColor = SystemColors.Control; // 重置背景色
+
+            // 显示添加照片按钮
+            addbutton.Show();
+
             // 生成文件名（可以使用日期作为文件名）
             string fileName = selectedDate.ToString("yyyy-MM-dd") + ".json";
-
-            // 创建文件路径
-            string filePath = Path.Combine(DairyManager.DiariesFolder, selectedDate.ToString("yyyy-MM-dd"), fileName); // DiariesFolder 包含了 diaries 文件夹
+            string filePath = Path.Combine(DairyManager.DiariesFolder, selectedDate.ToString("yyyy-MM-dd"), fileName);
 
             try
             {
-                // 读取 JSON 文件内容
-                string json = File.ReadAllText(filePath);
-
-                // 将 JSON 反序列化为 DiaryEntry 对象
-                DiaryEntry diaryEntry = JsonConvert.DeserializeObject<DiaryEntry>(json);
-
-                dateTimePicker1.Value = diaryEntry.Date;
-                moodcomboBox.SelectedItem = diaryEntry.Mood;
-                weathercomboBox.SelectedItem = diaryEntry.Weather;
-                context.Text = diaryEntry.Context;
-                BackColor = diaryEntry.SelectedColor;
-
-
-
-                for (int i = 0; i < diaryEntry.PhotoFileNames.Count; i++)
+                if (File.Exists(filePath))
                 {
-                    string photoFileName = diaryEntry.PhotoFileNames[i];
-                    string photoFilePath = Path.Combine(DairyManager.DiariesFolder, selectedDate.ToString("yyyy-MM-dd"), photoFileName);
-                    if (File.Exists(photoFilePath))
+                    // 读取 JSON 文件内容
+                    string json = File.ReadAllText(filePath);
+
+                    // 将 JSON 反序列化为 DiaryEntry 对象
+                    DiaryEntry diaryEntry = JsonConvert.DeserializeObject<DiaryEntry>(json);
+
+                    dateTimePicker1.Value = diaryEntry.Date;
+                    moodcomboBox.SelectedItem = diaryEntry.Mood;
+                    weathercomboBox.SelectedItem = diaryEntry.Weather;
+                    context.Text = diaryEntry.Context;
+                    BackColor = diaryEntry.SelectedColor;
+
+                    for (int i = 0; i < diaryEntry.PhotoFileNames.Count; i++)
                     {
-                        Image image = Image.FromFile(photoFilePath);
-                        pictureBoxes[i].Show(); // 显示对应的 PictureBox
-                        pictureBoxes[i].Image = image;
+                        string photoFileName = diaryEntry.PhotoFileNames[i];
+                        string photoFilePath = Path.Combine(DairyManager.DiariesFolder, selectedDate.ToString("yyyy-MM-dd"), photoFileName);
+                        if (File.Exists(photoFilePath))
+                        {
+                            Image image = Image.FromFile(photoFilePath);
+                            pictureBoxes[i].Show(); // 显示对应的 PictureBox
+                            pictureBoxes[i].Image = image;
+                        }
                     }
                 }
             }
@@ -636,17 +309,16 @@ namespace 日曆
             }
         }
 
-
         public Color selectedColor;
-        public void colorbutton_Click(object sender, EventArgs e)
+
+        private void colorbutton_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
-            
+
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 selectedColor = colorDialog.Color;
-                // 設定視窗的背景色為水平漸層
-                this.BackColor = Color.White; // 起始顏色，這裡假設是白色
+                this.BackColor = Color.White;
                 this.Paint += (s, pe) =>
                 {
                     using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, Color.White, colorDialog.Color, LinearGradientMode.Horizontal))
@@ -655,8 +327,12 @@ namespace 日曆
                     }
                 };
             }
+        }
 
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            selectedDate = dateTimePicker1.Value;
+            OpenDiaryForm(selectedDate);
         }
     }
 }
-

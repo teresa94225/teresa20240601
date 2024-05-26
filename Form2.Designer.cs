@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             addAccountButton = new Button();
-            balanceQueryButton = new Button();
             label1 = new Label();
             accountsDataGridView = new DataGridView();
             NameColumn = new DataGridViewTextBoxColumn();
@@ -40,38 +39,29 @@
             dateTimePicker1 = new DateTimePicker();
             button1 = new Button();
             savebutton = new Button();
+            deletebutton1 = new Button();
+            clearButton = new Button();
             ((System.ComponentModel.ISupportInitialize)accountsDataGridView).BeginInit();
             SuspendLayout();
             // 
             // addAccountButton
             // 
-            addAccountButton.Location = new Point(466, 216);
-            addAccountButton.Margin = new Padding(2);
+            addAccountButton.Location = new Point(456, 257);
+            addAccountButton.Margin = new Padding(2, 3, 2, 3);
             addAccountButton.Name = "addAccountButton";
-            addAccountButton.Size = new Size(92, 27);
+            addAccountButton.Size = new Size(112, 34);
             addAccountButton.TabIndex = 0;
             addAccountButton.Text = "添加項目";
             addAccountButton.UseVisualStyleBackColor = true;
             addAccountButton.Click += addAccountButton_Click;
             // 
-            // balanceQueryButton
-            // 
-            balanceQueryButton.Location = new Point(27, 305);
-            balanceQueryButton.Margin = new Padding(2);
-            balanceQueryButton.Name = "balanceQueryButton";
-            balanceQueryButton.Size = new Size(92, 27);
-            balanceQueryButton.TabIndex = 2;
-            balanceQueryButton.Text = "查詢餘額";
-            balanceQueryButton.UseVisualStyleBackColor = true;
-            balanceQueryButton.Click += balanceQueryButton_Click;
-            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(361, 86);
+            label1.Location = new Point(441, 109);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(114, 19);
+            label1.Size = new Size(136, 24);
             label1.TabIndex = 3;
             label1.Text = "日常開銷名稱：";
             // 
@@ -79,12 +69,12 @@
             // 
             accountsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             accountsDataGridView.Columns.AddRange(new DataGridViewColumn[] { NameColumn, Amount });
-            accountsDataGridView.Location = new Point(27, 20);
-            accountsDataGridView.Margin = new Padding(2);
+            accountsDataGridView.Location = new Point(33, 25);
+            accountsDataGridView.Margin = new Padding(2, 3, 2, 3);
             accountsDataGridView.Name = "accountsDataGridView";
             accountsDataGridView.RowHeadersWidth = 62;
             accountsDataGridView.RowTemplate.Height = 32;
-            accountsDataGridView.Size = new Size(313, 261);
+            accountsDataGridView.Size = new Size(383, 330);
             accountsDataGridView.TabIndex = 4;
             // 
             // NameColumn
@@ -103,44 +93,45 @@
             // 
             // accountNameTextBox
             // 
-            accountNameTextBox.Location = new Point(506, 83);
-            accountNameTextBox.Margin = new Padding(2);
+            accountNameTextBox.Location = new Point(618, 105);
+            accountNameTextBox.Margin = new Padding(2, 3, 2, 3);
             accountNameTextBox.Name = "accountNameTextBox";
-            accountNameTextBox.Size = new Size(123, 27);
+            accountNameTextBox.Size = new Size(149, 30);
             accountNameTextBox.TabIndex = 5;
             // 
             // initialBalanceTextBox
             // 
-            initialBalanceTextBox.Location = new Point(506, 140);
-            initialBalanceTextBox.Margin = new Padding(2);
+            initialBalanceTextBox.Location = new Point(618, 177);
+            initialBalanceTextBox.Margin = new Padding(2, 3, 2, 3);
             initialBalanceTextBox.Name = "initialBalanceTextBox";
-            initialBalanceTextBox.Size = new Size(123, 27);
+            initialBalanceTextBox.Size = new Size(149, 30);
             initialBalanceTextBox.TabIndex = 6;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(394, 142);
+            label3.Location = new Point(482, 179);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(72, 19);
+            label3.Size = new Size(86, 24);
             label3.TabIndex = 10;
             label3.Text = "初始餘額:";
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(383, 30);
-            dateTimePicker1.Margin = new Padding(2);
+            dateTimePicker1.Location = new Point(468, 38);
+            dateTimePicker1.Margin = new Padding(2, 3, 2, 3);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(246, 27);
+            dateTimePicker1.Size = new Size(300, 30);
             dateTimePicker1.TabIndex = 11;
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // button1
             // 
-            button1.Location = new Point(137, 304);
-            button1.Margin = new Padding(2);
+            button1.Location = new Point(33, 384);
+            button1.Margin = new Padding(2, 3, 2, 3);
             button1.Name = "button1";
-            button1.Size = new Size(92, 28);
+            button1.Size = new Size(112, 35);
             button1.TabIndex = 12;
             button1.Text = "總和";
             button1.UseVisualStyleBackColor = true;
@@ -148,20 +139,42 @@
             // 
             // savebutton
             // 
-            savebutton.Location = new Point(248, 304);
-            savebutton.Margin = new Padding(2);
+            savebutton.Location = new Point(178, 385);
+            savebutton.Margin = new Padding(2, 3, 2, 3);
             savebutton.Name = "savebutton";
-            savebutton.Size = new Size(92, 27);
+            savebutton.Size = new Size(112, 34);
             savebutton.TabIndex = 13;
             savebutton.Text = "儲存";
             savebutton.UseVisualStyleBackColor = true;
             savebutton.Click += savebutton_Click;
             // 
+            // deletebutton1
+            // 
+            deletebutton1.Location = new Point(315, 384);
+            deletebutton1.Name = "deletebutton1";
+            deletebutton1.Size = new Size(101, 33);
+            deletebutton1.TabIndex = 14;
+            deletebutton1.Text = "刪除";
+            deletebutton1.UseVisualStyleBackColor = true;
+            deletebutton1.Click += deletebutton1_Click;
+            // 
+            // clearButton
+            // 
+            clearButton.Location = new Point(636, 257);
+            clearButton.Name = "clearButton";
+            clearButton.Size = new Size(112, 34);
+            clearButton.TabIndex = 15;
+            clearButton.Text = "清空";
+            clearButton.UseVisualStyleBackColor = true;
+            clearButton.Click += clearButton_Click;
+            // 
             // Form2
             // 
-            AutoScaleDimensions = new SizeF(9F, 19F);
+            AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(655, 356);
+            ClientSize = new Size(801, 450);
+            Controls.Add(clearButton);
+            Controls.Add(deletebutton1);
             Controls.Add(savebutton);
             Controls.Add(button1);
             Controls.Add(dateTimePicker1);
@@ -170,9 +183,8 @@
             Controls.Add(accountNameTextBox);
             Controls.Add(accountsDataGridView);
             Controls.Add(label1);
-            Controls.Add(balanceQueryButton);
             Controls.Add(addAccountButton);
-            Margin = new Padding(2);
+            Margin = new Padding(2, 3, 2, 3);
             Name = "Form2";
             Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)accountsDataGridView).EndInit();
@@ -183,7 +195,6 @@
         #endregion
 
         private Button addAccountButton;
-        private Button balanceQueryButton;
         private Label label1;
         private DataGridView accountsDataGridView;
         private TextBox accountNameTextBox;
@@ -194,5 +205,7 @@
         private DataGridViewTextBoxColumn NameColumn;
         private DataGridViewTextBoxColumn Amount;
         private Button savebutton;
+        private Button deletebutton1;
+        private Button clearButton;
     }
 }
