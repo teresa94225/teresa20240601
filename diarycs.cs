@@ -578,6 +578,7 @@ namespace 日曆
 
         public void OpenDiaryForm(DateTime selectedDate)
         {
+            button1.Hide();
             // 清空现有数据
             moodcomboBox.SelectedItem = null;
             weathercomboBox.SelectedItem = null;
@@ -667,9 +668,14 @@ namespace 日曆
                 }
                 else
                 {
-                    this.Close();
-                    choice choice = new choice(selectedDate);
-                    choice.OpenNewDiaryForm(selectedDate);
+                    // 關閉目前的視窗
+                    this.Hide();
+
+                    // 創建新的選擇表單並開啟新的日記表單
+                    choice choiceForm = new choice(selectedDate);
+                    choiceForm.TopMost = true;
+                    choiceForm.FormClosed += (s, args) => this.Close(); // 當新的選擇表單關閉時，關閉目前的視窗
+                    choiceForm.OpenNewDiaryForm(selectedDate);
                 }
             }
         }

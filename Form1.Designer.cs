@@ -36,8 +36,6 @@
             monthCalendar1.Location = new Point(228, 78);
             monthCalendar1.Name = "monthCalendar1";
             monthCalendar1.TabIndex = 0;
-            monthCalendar1.DateChanged += monthCalendar1_DateSelected;
-            monthCalendar1.DateSelected += monthCalendar1_DateSelected;
             // 
             // Form1
             // 

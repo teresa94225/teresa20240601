@@ -12,13 +12,16 @@ namespace 日曆
         public Form1()
         {
             InitializeComponent();
-            monthCalendar1.DateSelected += monthCalendar1_DateSelected;
+            monthCalendar1.DateSelected += monthCalendar1_DateChanged;
         }
-        public void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        public void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
-            DateTime selectedDate = monthCalendar1.SelectionStart;
-            choice choiceForm = new choice(selectedDate);
-            choiceForm.ShowDialog();
+            if (e.Start != e.End)
+            {
+                DateTime selectedDate = monthCalendar1.SelectionStart;
+                choice choiceForm = new choice(selectedDate);
+                choiceForm.ShowDialog();
+            }
         }
     }
 }
