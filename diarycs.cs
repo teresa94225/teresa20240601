@@ -578,7 +578,9 @@ namespace 日曆
 
         public void OpenDiaryForm(DateTime selectedDate)
         {
+            addbutton.Hide();
             button1.Hide();
+
             // 清空现有数据
             moodcomboBox.SelectedItem = null;
             weathercomboBox.SelectedItem = null;

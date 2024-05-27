@@ -23,5 +23,11 @@ namespace 日曆
                 choiceForm.ShowDialog();
             }
         }
+
+        private void memory_Click(object sender, EventArgs e)
+        {
+            memorycs memoryForm = new memorycs();
+            memoryForm.Show();
+        }
     }
 }
