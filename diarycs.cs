@@ -641,13 +641,17 @@ namespace 日曆
             {
                 selectedColor = colorDialog.Color;
                 this.BackColor = Color.White;
-                this.Paint += (s, pe) =>
-                {
-                    using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, Color.White, colorDialog.Color, LinearGradientMode.Horizontal))
-                    {
-                        pe.Graphics.FillRectangle(brush, this.ClientRectangle);
-                    }
-                };
+                this.Invalidate();
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, Color.White, selectedColor, LinearGradientMode.Horizontal))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }
         }
 
