@@ -17,7 +17,7 @@ namespace 日曆
         public void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
             DateTime selectedDate = monthCalendar1.SelectionStart;
-            choice choiceForm = new choice(this, selectedDate);
+            choice choiceForm = new choice(selectedDate);
             choiceForm.ShowDialog();
         }
     }

@@ -7,10 +7,11 @@ namespace 日曆
     {
         private DateTime selectedDate;
 
-        public choice(Form1 mainForm, DateTime diaryDate)
+        public choice( DateTime diaryDate)
         {
             InitializeComponent();
             selectedDate = diaryDate;
+
         }
 
         private void accountingbutton_Click(object sender, EventArgs e)
@@ -44,7 +45,7 @@ namespace 日曆
             }
         }
 
-        private void OpenNewDiaryForm(DateTime selectedDate)
+        public void OpenNewDiaryForm(DateTime selectedDate)
         {
             diarycs diaryForm = new diarycs(selectedDate);
             diaryForm.Owner = this;

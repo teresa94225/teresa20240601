@@ -527,15 +527,7 @@ namespace 日曆
             }
         }
 
-        //private void UpdatePictureBoxVisibility()
-        //{
-        //    if (totalphoto >= 6) { pictureBox6.Show(); button6.Show(); } else { pictureBox6.Hide(); button6.Hide(); }
-        //    if (totalphoto >= 5) { pictureBox5.Show(); button5.Show(); } else { pictureBox5.Hide(); button5.Hide(); }
-        //    if (totalphoto >= 4) { pictureBox4.Show(); button4.Show(); } else { pictureBox4.Hide(); button4.Hide(); }
-        //    if (totalphoto >= 3) { pictureBox3.Show(); button3.Show(); } else { pictureBox3.Hide(); button3.Hide(); }
-        //    if (totalphoto >= 2) { pictureBox2.Show(); button2.Show(); } else { pictureBox2.Hide(); button2.Hide(); }
-        //    if (totalphoto >= 1) { pictureBox1.Show(); button1.Show(); } else { pictureBox1.Hide(); button1.Hide(); }
-        //}
+        
 
         public void SetDateTimePickerValue(DateTime date)
         {
@@ -664,7 +656,17 @@ namespace 日曆
             if (selectedDate != dateTimePicker1.Value)
             {
                 selectedDate = dateTimePicker1.Value;
-                OpenDiaryForm(selectedDate);
+                if (DairyManager.DiaryExists(selectedDate))
+                {
+                    selectedDate = dateTimePicker1.Value;
+                    OpenDiaryForm(selectedDate);
+                }
+                else
+                {
+                    this.Close();
+                    choice choice = new choice(selectedDate);
+                    choice.OpenNewDiaryForm(selectedDate);
+                }
             }
         }
     }
