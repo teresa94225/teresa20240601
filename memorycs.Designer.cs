@@ -34,7 +34,6 @@
             memoListBox.Size = new Size(388, 459);
             memoListBox.TabIndex = 1;
             memoListBox.Click += MemoListBox_Click;
-            this.Load += Form1_Load;
             // 
             // title
             // 
@@ -66,6 +65,7 @@
             // 
             // btnSave
             // 
+            btnSave.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnSave.Location = new Point(685, 542);
             btnSave.Margin = new Padding(4);
             btnSave.Name = "btnSave";
@@ -86,7 +86,7 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // Form1
+            // memorycs
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -98,8 +98,9 @@
             Controls.Add(title);
             Controls.Add(memoListBox);
             Margin = new Padding(4, 5, 4, 5);
-            Name = "Form1";
+            Name = "memorycs";
             Text = "備忘錄";
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -24,21 +24,6 @@ namespace 日曆
             pictureBoxes.Add(pictureBox5);
             pictureBoxes.Add(pictureBox6);
 
-            this.Controls.Add(pictureBox2);
-            pictureBox2.Hide();
-            button2.Hide();
-            this.Controls.Add(pictureBox3);
-            pictureBox3.Hide();
-            button3.Hide();
-            this.Controls.Add(pictureBox4);
-            pictureBox4.Hide();
-            button4.Hide();
-            this.Controls.Add(pictureBox5);
-            pictureBox5.Hide();
-            button5.Hide();
-            this.Controls.Add(pictureBox6);
-            pictureBox6.Hide();
-            button6.Hide();
         }
 
         private void moodcomboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -72,43 +57,39 @@ namespace 日曆
                 {
                     pictureBox1.Image = Image.FromFile(selectedImagePath);
                     totalphoto++;
-                    pictureBox2.Show();
-                    button1.Show();
+                    
                 }
                 else if (pictureBox2.Image == null)
                 {
                     pictureBox2.Image = Image.FromFile(selectedImagePath);
                     totalphoto++;
-                    pictureBox3.Show();
-                    button2.Show();
+                    
                 }
                 else if (pictureBox3.Image == null)
                 {
                     pictureBox3.Image = Image.FromFile(selectedImagePath);
                     totalphoto++;
-                    pictureBox4.Show();
-                    button3.Show();
+                    
                 }
                 else if (pictureBox4.Image == null)
                 {
                     pictureBox4.Image = Image.FromFile(selectedImagePath);
                     totalphoto++;
-                    pictureBox5.Show();
-                    button4.Show();
+                    
                 }
                 else if (pictureBox5.Image == null)
                 {
                     pictureBox5.Image = Image.FromFile(selectedImagePath);
                     totalphoto++;
-                    pictureBox6.Show();
-                    button5.Show();
+                    
                 }
                 else if (pictureBox6.Image == null)
                 {
                     totalphoto++;
                     pictureBox6.Image = Image.FromFile(selectedImagePath);
-                    button6.Show();
+                    
                 }
+                
                 else
                 {
                     totalphoto++;
@@ -130,61 +111,7 @@ namespace 日曆
                 pictureBox4.Image = pictureBox5.Image;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                if (totalphoto == 5)
-                {
-                    pictureBox6.Show();
-                }
-                if (totalphoto == 4)
-                {
-                    pictureBox5.Show();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                }
-                if (totalphoto == 3)
-                {
-                    pictureBox4.Show();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                }
-                if (totalphoto == 2)
-                {
-                    pictureBox3.Show();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                }
-                if (totalphoto == 1)
-                {
-                    pictureBox2.Show();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                }
-                if (totalphoto == 0)
-                {
-                    pictureBox1.Show();
-                    pictureBox2.Hide();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                    button2.Hide();
-                }
-                //UpdatePictureBoxVisibility();
+                
             }
         }
 
@@ -200,61 +127,7 @@ namespace 日曆
                 pictureBox4.Image = pictureBox5.Image;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                if (totalphoto == 5)
-                {
-                    pictureBox6.Show();
-                }
-                if (totalphoto == 4)
-                {
-                    pictureBox5.Show();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                }
-                if (totalphoto == 3)
-                {
-                    pictureBox4.Show();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                }
-                if (totalphoto == 2)
-                {
-                    pictureBox3.Show();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                }
-                if (totalphoto == 1)
-                {
-                    pictureBox2.Show();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                }
-                if (totalphoto == 0)
-                {
-                    pictureBox1.Show();
-                    pictureBox2.Hide();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                    button2.Hide();
-                }
-                //UpdatePictureBoxVisibility();
+                
             }
         }
 
@@ -269,61 +142,7 @@ namespace 日曆
                 pictureBox4.Image = pictureBox5.Image;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                if (totalphoto == 5)
-                {
-                    pictureBox6.Show();
-                }
-                if (totalphoto == 4)
-                {
-                    pictureBox5.Show();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                }
-                if (totalphoto == 3)
-                {
-                    pictureBox4.Show();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                }
-                if (totalphoto == 2)
-                {
-                    pictureBox3.Show();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                }
-                if (totalphoto == 1)
-                {
-                    pictureBox2.Show();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                }
-                if (totalphoto == 0)
-                {
-                    pictureBox1.Show();
-                    pictureBox2.Hide();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                    button2.Hide();
-                }
-                //UpdatePictureBoxVisibility();
+                
             }
         }
 
@@ -337,61 +156,7 @@ namespace 日曆
                 pictureBox4.Image = pictureBox5.Image;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                if (totalphoto == 5)
-                {
-                    pictureBox6.Show();
-                }
-                if (totalphoto == 4)
-                {
-                    pictureBox5.Show();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                }
-                if (totalphoto == 3)
-                {
-                    pictureBox4.Show();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                }
-                if (totalphoto == 2)
-                {
-                    pictureBox3.Show();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                }
-                if (totalphoto == 1)
-                {
-                    pictureBox2.Show();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                }
-                if (totalphoto == 0)
-                {
-                    pictureBox1.Show();
-                    pictureBox2.Hide();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                    button2.Hide();
-                }
-                //UpdatePictureBoxVisibility();
+                
             }
         }
 
@@ -404,61 +169,7 @@ namespace 日曆
                 pictureBox5.Image = null;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                if (totalphoto == 5)
-                {
-                    pictureBox6.Show();
-                }
-                if (totalphoto == 4)
-                {
-                    pictureBox5.Show();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                }
-                if (totalphoto == 3)
-                {
-                    pictureBox4.Show();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                }
-                if (totalphoto == 2)
-                {
-                    pictureBox3.Show();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                }
-                if (totalphoto == 1)
-                {
-                    pictureBox2.Show();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                }
-                if (totalphoto == 0)
-                {
-                    pictureBox1.Show();
-                    pictureBox2.Hide();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                    button2.Hide();
-                }
-                //UpdatePictureBoxVisibility();
+                
             }
         }
 
@@ -469,65 +180,9 @@ namespace 日曆
             {
                 totalphoto--;
                 pictureBox6.Image = null;
-                if (totalphoto == 5)
-                {
-                    pictureBox6.Show();
-                }
-                if (totalphoto == 4)
-                {
-                    pictureBox5.Show();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                }
-                if (totalphoto == 3)
-                {
-                    pictureBox4.Show();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                }
-                if (totalphoto == 2)
-                {
-                    pictureBox3.Show();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                }
-                if (totalphoto == 1)
-                {
-                    pictureBox2.Show();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                }
-                if (totalphoto == 0)
-                {
-                    pictureBox1.Show();
-                    pictureBox2.Hide();
-                    pictureBox3.Hide();
-                    pictureBox4.Hide();
-                    pictureBox5.Hide();
-                    pictureBox6.Hide();
-                    button6.Hide();
-                    button5.Hide();
-                    button4.Hide();
-                    button3.Hide();
-                    button2.Hide();
-                }
-                //UpdatePictureBoxVisibility();
+                
             }
         }
-
-        
 
         public void SetDateTimePickerValue(DateTime date)
         {
@@ -547,53 +202,50 @@ namespace 日曆
                 PhotoFileNames = new List<string>()
             };
 
-            for (int i = 0; i < totalphoto; i++)
+            for (int i = 0; i <= totalphoto; i++)
             {
-                string photoFileName = $"{entry.Date.ToString("yyyy-MM-dd")}_photo{(i + 1)}.jpg";
-                string photoFilePath = Path.Combine(DairyManager.DiariesFolder, selectedDate.ToString("yyyy-MM-dd"), photoFileName);
+                if (pictureBoxes[i].Image != null)
+                {
+                    string photoFileName = $"{entry.Date.ToString("yyyy-MM-dd")}_photo{(i + 1)}.jpg";
+                    string photoFilePath = Path.Combine(DairyManager.DiariesFolder, selectedDate.ToString("yyyy-MM-dd"), photoFileName);
 
-                if (File.Exists(photoFilePath))
-                {
-                    // 如果照片文件已存在，先刪除再保存
-                    File.Delete(photoFilePath);
-                    
-                }
+                    try
+                    {
+                        // 如果文件存在，先删除
+                        if (File.Exists(photoFilePath))
+                        {
+                            File.Delete(photoFilePath);
+                        }
 
-                try
-                {
-                    pictureBoxes[i].Image.Save(photoFilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    entry.PhotoFileNames.Add(photoFileName);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"保存照片失败：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                        pictureBoxes[i].Image.Save(photoFilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        entry.PhotoFileNames.Add(photoFileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"照片儲存失败：{ex.Message}", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
             }
 
-
             DairyManager.SaveToFile(entry, selectedDate);
-            MessageBox.Show("日记保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("日記儲存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void OpenDiaryForm(DateTime selectedDate)
         {
-            addbutton.Hide();
-            button1.Hide();
+            
 
             // 清空现有数据
             moodcomboBox.SelectedItem = null;
             weathercomboBox.SelectedItem = null;
             context.Text = string.Empty;
+            BackColor = SystemColors.Control; // 重置背景色
             foreach (var pictureBox in pictureBoxes)
             {
                 pictureBox.Image = null;
-                pictureBox.Hide();
             }
-            BackColor = SystemColors.Control; // 重置背景色
 
-            // 显示添加照片按钮
-            addbutton.Show();
 
             // 生成文件名（可以使用日期作为文件名）
             string fileName = selectedDate.ToString("yyyy-MM-dd") + ".json";
@@ -622,7 +274,6 @@ namespace 日曆
                         if (File.Exists(photoFilePath))
                         {
                             Image image = Image.FromFile(photoFilePath);
-                            pictureBoxes[i].Show(); // 显示对应的 PictureBox
                             pictureBoxes[i].Image = image;
                         }
                     }
@@ -630,7 +281,7 @@ namespace 日曆
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"打开 JSON 文件时出错: {ex.Message}");
+                MessageBox.Show($"打開 JSON 文件時出錯: {ex.Message}");
             }
         }
 
@@ -670,16 +321,34 @@ namespace 日曆
                 }
                 else
                 {
-                    // 關閉目前的視窗
-                    this.Hide();
-
-                    // 創建新的選擇表單並開啟新的日記表單
-                    choice choiceForm = new choice(selectedDate);
-                    choiceForm.TopMost = true;
-                    choiceForm.FormClosed += (s, args) => this.Close(); // 當新的選擇表單關閉時，關閉目前的視窗
-                    choiceForm.OpenNewDiaryForm(selectedDate);
+                    OpenNewDiaryForm(selectedDate);
                 }
             }
+        }
+        public void OpenNewDiaryForm(DateTime selectedDate)
+        {
+
+
+            // 清空心情和天气下拉框
+            moodcomboBox.SelectedItem = null;
+            moodcomboBox.Text = "心情";
+            weathercomboBox.SelectedItem = null;
+            weathercomboBox.Text = "天氣";
+
+            // 清空文本框
+            context.Text = string.Empty;
+
+            // 清空背景颜色
+            BackColor = SystemColors.Control;
+
+            // 清空所有图片框
+            foreach (var pictureBox in pictureBoxes)
+            {
+                pictureBox.Image = null;
+            }
+
+            // 重置照片计数器
+            totalphoto = 0;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using Newtonsoft.Json;
 
 namespace 日曆
@@ -17,6 +18,8 @@ namespace 日曆
             _selectedDate = selectedDate;
             dateTimePicker1.Value = selectedDate; // 设置日期选择器的值为选择的日期
             OpenaccountingForm(_selectedDate); // 加载现有的记账数据
+            InitializeChart();
+            UpdateChart();
         }
 
         private void addAccountButton_Click(object sender, EventArgs e)
@@ -32,11 +35,14 @@ namespace 日曆
                 UpdateDataGridView();
                 accountNameTextBox.Text = string.Empty;
                 initialBalanceTextBox.Text = string.Empty;
+                UpdateDataGridView();
+                UpdateChart();
             }
             else
             {
                 MessageBox.Show("請輸入有效的金額。");
             }
+
         }
 
         private void UpdateDataGridView()
@@ -76,11 +82,12 @@ namespace 日曆
                         Amount = Convert.ToDecimal(row.Cells["Amount"].Value)
                     };
                     accountingEntries.Add(entry);
+
                 }
             }
 
             DairyManager.accoutingSaveToFile(accountingEntries, _selectedDate);
-            MessageBox.Show("記賬保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("記帳儲存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void OpenaccountingForm(DateTime selectedDate)
@@ -105,17 +112,19 @@ namespace 日曆
                     }
 
                     expenses = entries.Select(entry => new Expense(entry.ExpenseName, entry.Amount, entry.Date)).ToList();
+                    UpdateChart();
                 }
                 else
                 {
                     // 如果文件不存在，清空现有数据
                     expenses.Clear();
                     accountsDataGridView.Rows.Clear();
+                    UpdateChart();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"打开 JSON 文件时出错: {ex.Message}");
+
             }
         }
 
@@ -131,15 +140,77 @@ namespace 日曆
             {
                 if (!row.IsNewRow)
                 {
+                    var expenseName = row.Cells["NameColumn"].Value.ToString();
+
+                    // 从 DataGridView 中移除选定的行
                     accountsDataGridView.Rows.Remove(row);
+
+                    // 从 expenses 列表中移除相应的数据
+                    var expenseToRemove = expenses.FirstOrDefault(expense => expense.Name == expenseName);
+                    if (expenseToRemove != null)
+                    {
+                        expenses.Remove(expenseToRemove);
+                    }
+
+                    // 从圆饼图中移除相应的数据
+                    RemoveFromChart(expenseName);
                 }
             }
         }
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-            accountNameTextBox.Text = string.Empty;
-            initialBalanceTextBox.Text = string.Empty;
+
+            accountsDataGridView.Rows.Clear(); // 清除 DataGridView 內容
+            expenses.Clear(); // 清空 expenses 列表
+            InitializeChart(); // 更新圖表
         }
+        private void InitializeChart()
+        {
+            chart1.Series.Clear();
+            Series series = chart1.Series.Add("Expenses");
+            series.ChartType = SeriesChartType.Pie;
+            series.IsValueShownAsLabel = true;
+        }
+
+        private void UpdateChart()
+        {
+            chart1.Series["Expenses"].Points.Clear();
+            var expenseGroups = expenses.GroupBy(e => e.Name).Select(g => new
+            {
+                Name = g.Key,
+                Total = g.Sum(e => e.Amount)
+            });
+
+            foreach (var group in expenseGroups)
+            {
+                chart1.Series["Expenses"].Points.AddXY(group.Name, group.Total);
+            }
+        }
+
+        private void RemoveFromChart(string itemName)
+        {
+            // 查找并移除指定项目的点
+            var pointToRemove = chart1.Series["Expenses"].Points.FirstOrDefault(point => point.AxisLabel == itemName);
+            if (pointToRemove != null)
+            {
+                chart1.Series["Expenses"].Points.Remove(pointToRemove);
+            }
+        }
+        public class Expense
+        {
+            public string Name { get; set; }
+            public decimal Amount { get; set; }
+            public DateTime Date { get; set; }
+
+            public Expense(string name, decimal amount, DateTime date)
+            {
+                Name = name;
+                Amount = amount;
+                Date = date;
+            }
+        }
+
+
     }
 }

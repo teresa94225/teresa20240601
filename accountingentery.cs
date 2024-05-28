@@ -13,4 +13,5 @@ namespace 日曆
             return $"日期: {Date}, 項目: {ExpenseName}, 價錢: {Amount:C}";
         }
     }
+
 }

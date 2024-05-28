@@ -46,12 +46,12 @@ namespace 日曆
             File.WriteAllText(filePath, json);
 
             // 提示用户保存成功
-            MessageBox.Show("Saved successfully.");
+            MessageBox.Show("備忘錄儲存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             memoListBox.Items.Add(this.title.Text);
 
-            this.title.Text = "";
-            Memo.Text = "";
+            this.title.Text = null;
+            Memo.Text = null;
         }
 
         public const string memoryfolder = "memory";
