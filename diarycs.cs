@@ -89,11 +89,9 @@ namespace 日曆
                     pictureBox6.Image = Image.FromFile(selectedImagePath);
                     
                 }
-                
-                else
+                else if(totalphoto>=6)
                 {
-                    totalphoto++;
-                    emptyPictureBox.Image = Image.FromFile(selectedImagePath);
+                    MessageBox.Show("最多只能放六張照片歐!!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
