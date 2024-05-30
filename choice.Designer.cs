@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(choice));
             diarybutton = new Button();
             accountingbutton = new Button();
             label1 = new Label();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // diarybutton
@@ -60,22 +63,35 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft JhengHei UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(282, 89);
+            label1.Location = new Point(341, 88);
             label1.Name = "label1";
-            label1.Size = new Size(248, 36);
+            label1.Size = new Size(211, 36);
             label1.TabIndex = 2;
-            label1.Text = "請選擇服務項目🙂";
+            label1.Text = "請選擇服務項目";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(283, 79);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(65, 53);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 3;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // choice
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox1);
             Controls.Add(label1);
             Controls.Add(accountingbutton);
             Controls.Add(diarybutton);
             Name = "choice";
             Text = "choice";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -85,5 +101,6 @@
         private Button diarybutton;
         private Button accountingbutton;
         private Label label1;
+        private PictureBox pictureBox1;
     }
 }

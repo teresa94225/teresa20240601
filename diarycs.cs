@@ -57,39 +57,39 @@ namespace 日曆
                 {
                     pictureBox1.Image = Image.FromFile(selectedImagePath);
                     totalphoto++;
-                    
+
                 }
                 else if (pictureBox2.Image == null)
                 {
                     pictureBox2.Image = Image.FromFile(selectedImagePath);
                     totalphoto++;
-                    
+
                 }
                 else if (pictureBox3.Image == null)
                 {
                     pictureBox3.Image = Image.FromFile(selectedImagePath);
                     totalphoto++;
-                    
+
                 }
                 else if (pictureBox4.Image == null)
                 {
                     pictureBox4.Image = Image.FromFile(selectedImagePath);
                     totalphoto++;
-                    
+
                 }
                 else if (pictureBox5.Image == null)
                 {
                     pictureBox5.Image = Image.FromFile(selectedImagePath);
                     totalphoto++;
-                    
+
                 }
                 else if (pictureBox6.Image == null)
                 {
                     totalphoto++;
                     pictureBox6.Image = Image.FromFile(selectedImagePath);
-                    
+
                 }
-                else if(totalphoto>=6)
+                else if (totalphoto >= 6)
                 {
                     MessageBox.Show("最多只能放六張照片歐!!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -109,7 +109,7 @@ namespace 日曆
                 pictureBox4.Image = pictureBox5.Image;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                
+
             }
         }
 
@@ -125,7 +125,7 @@ namespace 日曆
                 pictureBox4.Image = pictureBox5.Image;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                
+
             }
         }
 
@@ -140,7 +140,7 @@ namespace 日曆
                 pictureBox4.Image = pictureBox5.Image;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                
+
             }
         }
 
@@ -154,7 +154,7 @@ namespace 日曆
                 pictureBox4.Image = pictureBox5.Image;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                
+
             }
         }
 
@@ -167,7 +167,7 @@ namespace 日曆
                 pictureBox5.Image = null;
                 pictureBox5.Image = pictureBox6.Image;
                 pictureBox6.Image = null;
-                
+
             }
         }
 
@@ -178,7 +178,7 @@ namespace 日曆
             {
                 totalphoto--;
                 pictureBox6.Image = null;
-                
+
             }
         }
 
@@ -213,6 +213,8 @@ namespace 日曆
                         if (File.Exists(photoFilePath))
                         {
                             File.Delete(photoFilePath);
+                            pictureBoxes[i].Image.Save(photoFilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                            entry.PhotoFileNames.Add(photoFileName);
                         }
 
                         pictureBoxes[i].Image.Save(photoFilePath, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -232,7 +234,7 @@ namespace 日曆
 
         public void OpenDiaryForm(DateTime selectedDate)
         {
-            
+
 
             // 清空现有数据
             moodcomboBox.SelectedItem = null;
@@ -301,7 +303,7 @@ namespace 日曆
         {
             base.OnPaint(e);
 
-            using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, Color.White, selectedColor, LinearGradientMode.Horizontal))
+            using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle, Color.White, selectedColor, LinearGradientMode.Vertical))
             {
                 e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }

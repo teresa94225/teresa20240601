@@ -7,7 +7,7 @@ namespace 日曆
     {
         private DateTime selectedDate;
 
-        public choice( DateTime diaryDate)
+        public choice(DateTime diaryDate)
         {
             InitializeComponent();
             selectedDate = diaryDate;
@@ -75,6 +75,11 @@ namespace 日曆
             {
                 diaryEntries[date] = content;
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            pictureBox1.SendToBack();
         }
     }
 }

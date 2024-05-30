@@ -61,32 +61,32 @@ namespace 日曆
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(46, 45);
-            dateTimePicker1.Margin = new Padding(4);
+            dateTimePicker1.CalendarFont = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimePicker1.Location = new Point(44, 34);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(268, 30);
+            dateTimePicker1.Size = new Size(220, 27);
             dateTimePicker1.TabIndex = 0;
             dateTimePicker1.Value = new DateTime(2024, 5, 11, 0, 0, 0, 0);
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // moodcomboBox
             // 
+            moodcomboBox.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             moodcomboBox.FormattingEnabled = true;
             moodcomboBox.Items.AddRange(new object[] { "😊", "😔", "😡", "😄", "😢" });
-            moodcomboBox.Location = new Point(372, 45);
-            moodcomboBox.Margin = new Padding(4);
+            moodcomboBox.Location = new Point(304, 30);
             moodcomboBox.Name = "moodcomboBox";
-            moodcomboBox.Size = new Size(200, 32);
+            moodcomboBox.Size = new Size(164, 33);
             moodcomboBox.TabIndex = 1;
             moodcomboBox.Text = "心情";
             moodcomboBox.SelectedIndexChanged += moodcomboBox_SelectedIndexChanged;
             // 
             // savebutton
             // 
-            savebutton.Location = new Point(840, 42);
-            savebutton.Margin = new Padding(4);
+            savebutton.Font = new Font("Microsoft JhengHei UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            savebutton.Location = new Point(687, 29);
             savebutton.Name = "savebutton";
-            savebutton.Size = new Size(134, 37);
+            savebutton.Size = new Size(110, 34);
             savebutton.TabIndex = 4;
             savebutton.Text = "儲存";
             savebutton.UseVisualStyleBackColor = true;
@@ -96,21 +96,20 @@ namespace 日曆
             // 
             context.EnableAutoDragDrop = true;
             context.Font = new Font("Microsoft JhengHei UI", 14.8000011F, FontStyle.Regular, GraphicsUnit.Point);
-            context.Location = new Point(29, 101);
-            context.Margin = new Padding(4);
+            context.Location = new Point(24, 80);
             context.Name = "context";
-            context.Size = new Size(954, 767);
+            context.Size = new Size(781, 608);
             context.TabIndex = 5;
             context.Text = "";
             // 
             // weathercomboBox
             // 
+            weathercomboBox.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             weathercomboBox.FormattingEnabled = true;
             weathercomboBox.Items.AddRange(new object[] { "☀️", "☁️", "🌧️", "❄️", "🌈" });
-            weathercomboBox.Location = new Point(620, 45);
-            weathercomboBox.Margin = new Padding(4);
+            weathercomboBox.Location = new Point(500, 29);
             weathercomboBox.Name = "weathercomboBox";
-            weathercomboBox.Size = new Size(182, 32);
+            weathercomboBox.Size = new Size(150, 33);
             weathercomboBox.TabIndex = 6;
             weathercomboBox.Text = "天氣";
             weathercomboBox.SelectedIndexChanged += weathercomboBox_SelectedIndexChanged;
@@ -120,10 +119,9 @@ namespace 日曆
             pictureBox1.BackColor = SystemColors.ControlLight;
             pictureBox1.BackgroundImageLayout = ImageLayout.Center;
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox1.Location = new Point(1019, 144);
-            pictureBox1.Margin = new Padding(4);
+            pictureBox1.Location = new Point(834, 114);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(290, 221);
+            pictureBox1.Size = new Size(238, 176);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
@@ -131,11 +129,11 @@ namespace 日曆
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("微軟正黑體", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label1.Location = new Point(1288, 59);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(1054, 47);
             label1.Name = "label1";
-            label1.Size = new Size(92, 46);
+            label1.Size = new Size(77, 38);
             label1.TabIndex = 12;
             label1.Text = "照片";
             // 
@@ -144,10 +142,9 @@ namespace 日曆
             pictureBox2.BackColor = SystemColors.ControlLight;
             pictureBox2.BackgroundImageLayout = ImageLayout.Center;
             pictureBox2.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox2.Location = new Point(1352, 144);
-            pictureBox2.Margin = new Padding(4);
+            pictureBox2.Location = new Point(1106, 114);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(290, 221);
+            pictureBox2.Size = new Size(238, 176);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 13;
             pictureBox2.TabStop = false;
@@ -157,10 +154,9 @@ namespace 日曆
             pictureBox3.BackColor = SystemColors.ControlLight;
             pictureBox3.BackgroundImageLayout = ImageLayout.Center;
             pictureBox3.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox3.Location = new Point(1019, 394);
-            pictureBox3.Margin = new Padding(4);
+            pictureBox3.Location = new Point(834, 312);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(290, 221);
+            pictureBox3.Size = new Size(238, 176);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 14;
             pictureBox3.TabStop = false;
@@ -170,10 +166,9 @@ namespace 日曆
             pictureBox4.BackColor = SystemColors.ControlLight;
             pictureBox4.BackgroundImageLayout = ImageLayout.Center;
             pictureBox4.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox4.Location = new Point(1352, 394);
-            pictureBox4.Margin = new Padding(4);
+            pictureBox4.Location = new Point(1106, 312);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(290, 221);
+            pictureBox4.Size = new Size(238, 176);
             pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox4.TabIndex = 15;
             pictureBox4.TabStop = false;
@@ -181,10 +176,9 @@ namespace 日曆
             // addbutton
             // 
             addbutton.Font = new Font("Microsoft JhengHei UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            addbutton.Location = new Point(1590, 59);
-            addbutton.Margin = new Padding(4);
+            addbutton.Location = new Point(1301, 47);
             addbutton.Name = "addbutton";
-            addbutton.Size = new Size(53, 48);
+            addbutton.Size = new Size(43, 38);
             addbutton.TabIndex = 16;
             addbutton.Text = "+";
             addbutton.UseVisualStyleBackColor = true;
@@ -192,10 +186,9 @@ namespace 日曆
             // 
             // button1
             // 
-            button1.Location = new Point(1023, 149);
-            button1.Margin = new Padding(4);
+            button1.Location = new Point(837, 118);
             button1.Name = "button1";
-            button1.Size = new Size(39, 37);
+            button1.Size = new Size(32, 29);
             button1.TabIndex = 17;
             button1.Text = "X";
             button1.UseVisualStyleBackColor = true;
@@ -203,10 +196,9 @@ namespace 日曆
             // 
             // button2
             // 
-            button2.Location = new Point(1357, 148);
-            button2.Margin = new Padding(4);
+            button2.Location = new Point(1110, 117);
             button2.Name = "button2";
-            button2.Size = new Size(39, 37);
+            button2.Size = new Size(32, 29);
             button2.TabIndex = 18;
             button2.Text = "X";
             button2.UseVisualStyleBackColor = true;
@@ -214,10 +206,9 @@ namespace 日曆
             // 
             // button3
             // 
-            button3.Location = new Point(1024, 397);
-            button3.Margin = new Padding(4);
+            button3.Location = new Point(838, 314);
             button3.Name = "button3";
-            button3.Size = new Size(39, 37);
+            button3.Size = new Size(32, 29);
             button3.TabIndex = 19;
             button3.Text = "X";
             button3.UseVisualStyleBackColor = true;
@@ -225,10 +216,9 @@ namespace 日曆
             // 
             // button4
             // 
-            button4.Location = new Point(1357, 400);
-            button4.Margin = new Padding(4);
+            button4.Location = new Point(1110, 317);
             button4.Name = "button4";
-            button4.Size = new Size(39, 37);
+            button4.Size = new Size(32, 29);
             button4.TabIndex = 20;
             button4.Text = "X";
             button4.UseVisualStyleBackColor = true;
@@ -239,10 +229,9 @@ namespace 日曆
             pictureBox5.BackColor = SystemColors.ControlLight;
             pictureBox5.BackgroundImageLayout = ImageLayout.Center;
             pictureBox5.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox5.Location = new Point(1019, 647);
-            pictureBox5.Margin = new Padding(4);
+            pictureBox5.Location = new Point(834, 512);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(290, 221);
+            pictureBox5.Size = new Size(238, 176);
             pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox5.TabIndex = 21;
             pictureBox5.TabStop = false;
@@ -252,20 +241,18 @@ namespace 日曆
             pictureBox6.BackColor = SystemColors.ControlLight;
             pictureBox6.BackgroundImageLayout = ImageLayout.Center;
             pictureBox6.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox6.Location = new Point(1352, 647);
-            pictureBox6.Margin = new Padding(4);
+            pictureBox6.Location = new Point(1106, 512);
             pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(290, 221);
+            pictureBox6.Size = new Size(238, 176);
             pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox6.TabIndex = 22;
             pictureBox6.TabStop = false;
             // 
             // button5
             // 
-            button5.Location = new Point(1024, 653);
-            button5.Margin = new Padding(4);
+            button5.Location = new Point(838, 517);
             button5.Name = "button5";
-            button5.Size = new Size(39, 37);
+            button5.Size = new Size(32, 29);
             button5.TabIndex = 23;
             button5.Text = "X";
             button5.UseVisualStyleBackColor = true;
@@ -273,10 +260,9 @@ namespace 日曆
             // 
             // button6
             // 
-            button6.Location = new Point(1357, 653);
-            button6.Margin = new Padding(4);
+            button6.Location = new Point(1110, 517);
             button6.Name = "button6";
-            button6.Size = new Size(39, 37);
+            button6.Size = new Size(32, 29);
             button6.TabIndex = 24;
             button6.Text = "X";
             button6.UseVisualStyleBackColor = true;
@@ -285,10 +271,9 @@ namespace 日曆
             // colorbutton
             // 
             colorbutton.Font = new Font("Microsoft JhengHei UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            colorbutton.Location = new Point(1472, 54);
-            colorbutton.Margin = new Padding(4);
+            colorbutton.Location = new Point(1204, 43);
             colorbutton.Name = "colorbutton";
-            colorbutton.Size = new Size(100, 62);
+            colorbutton.Size = new Size(82, 49);
             colorbutton.TabIndex = 25;
             colorbutton.Text = "color";
             colorbutton.UseVisualStyleBackColor = true;
@@ -296,10 +281,10 @@ namespace 日曆
             // 
             // diarycs
             // 
-            AutoScaleDimensions = new SizeF(11F, 24F);
+            AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(1679, 897);
+            ClientSize = new Size(1374, 710);
             Controls.Add(colorbutton);
             Controls.Add(button6);
             Controls.Add(button5);
@@ -320,7 +305,6 @@ namespace 日曆
             Controls.Add(savebutton);
             Controls.Add(moodcomboBox);
             Controls.Add(dateTimePicker1);
-            Margin = new Padding(4);
             Name = "diarycs";
             Text = "Diary";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
