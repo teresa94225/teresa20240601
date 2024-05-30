@@ -70,25 +70,25 @@ namespace 日曆
 
         private void MemoListBox_Click(object sender, EventArgs e)
         {
-            if (memoListBox.SelectedItem != null)
+            // 从 ListBox 选择的项中提取标题，忽略日期部分
+            string selectedItem = memoListBox.SelectedItem.ToString();
+            string selectedTitle = selectedItem.Substring(0, selectedItem.LastIndexOf(" (")); // 去掉日期部分
+
+            string folderPath = Path.Combine(Environment.CurrentDirectory, "memory");
+            string filePath = Path.Combine(folderPath, selectedTitle + ".json");
+
+            if (File.Exists(filePath))
             {
-                string selectedTitle = memoListBox.SelectedItem.ToString();
-                string folderPath = Path.Combine(Environment.CurrentDirectory, "memory");
-                string filePath = Path.Combine(folderPath, selectedTitle + ".json");
+                string json = File.ReadAllText(filePath);
+                getset entry = JsonConvert.DeserializeObject<getset>(json);
 
-                if (File.Exists(filePath))
-                {
-                    string json = File.ReadAllText(filePath);
-                    getset entry = JsonConvert.DeserializeObject<getset>(json);
-
-                    // 在此处使用 entry 对象，例如显示到 UI 中
-                    this.title.Text = entry.title;
-                    Memo.Text = entry.Memo;
-                }
-                else
-                {
-                    MessageBox.Show("File not found.");
-                }
+                // 在此处使用 entry 对象，例如显示到 UI 中
+                this.title.Text = entry.title;
+                Memo.Text = entry.Memo;
+            }
+            else
+            {
+                MessageBox.Show("File not found.");
             }
         }
 
@@ -141,6 +141,42 @@ namespace 日曆
             {
                 MessageBox.Show("請選擇要刪除的備忘錄。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void memoListBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0)
+                return;
+
+            // 获取当前项的文本
+            string itemText = memoListBox.Items[e.Index].ToString();
+
+            // 分割标题和日期
+            int lastParenIndex = itemText.LastIndexOf(" (");
+            string title = itemText.Substring(0, lastParenIndex);
+            string date = itemText.Substring(lastParenIndex);
+
+            // 获取字体和颜色
+            Font titleFont = e.Font;
+            Font dateFont = new Font(e.Font.FontFamily, e.Font.Size - 5); // 较小的字体
+            Brush titleBrush = new SolidBrush(e.ForeColor);
+            Brush dateBrush = Brushes.Gray; // 灰色
+
+            // 清除背景
+            e.DrawBackground();
+
+            // 计算标题和日期的大小
+            SizeF titleSize = e.Graphics.MeasureString(title, titleFont);
+            SizeF dateSize = e.Graphics.MeasureString(date, dateFont);
+
+            // 绘制标题
+            e.Graphics.DrawString(title, titleFont, titleBrush, e.Bounds.X, e.Bounds.Y);
+
+            // 绘制日期
+            e.Graphics.DrawString(date, dateFont, dateBrush, e.Bounds.X + titleSize.Width, e.Bounds.Y + (e.Bounds.Height - dateSize.Height) / 2);
+
+            // 绘制焦点矩形
+            e.DrawFocusRectangle();
         }
     }
 }

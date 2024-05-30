@@ -34,6 +34,8 @@
             memoListBox.Size = new Size(394, 494);
             memoListBox.TabIndex = 1;
             memoListBox.Click += MemoListBox_Click;
+            this.memoListBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.memoListBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.memoListBox_DrawItem);
             // 
             // title
             // 
