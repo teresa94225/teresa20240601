@@ -35,12 +35,13 @@
             label2 = new Label();
             timer2 = new System.Windows.Forms.Timer(components);
             pictureBox1 = new PictureBox();
+            meteorTimer = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // monthCalendar1
             // 
-            monthCalendar1.Location = new Point(238, 164);
+            monthCalendar1.Location = new Point(262, 162);
             monthCalendar1.Name = "monthCalendar1";
             monthCalendar1.TabIndex = 0;
             // 
@@ -59,7 +60,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = Color.DarkBlue;
+            label2.ForeColor = Color.LightBlue;
             label2.Location = new Point(140, 48);
             label2.Name = "label2";
             label2.Size = new Size(0, 25);
@@ -78,6 +79,7 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
+            
             // 
             // Form1
             // 
@@ -90,6 +92,7 @@
             Controls.Add(monthCalendar1);
             Name = "Form1";
             Text = "日常應用程式";
+            Paint += Form1_Paint;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -102,5 +105,6 @@
         private Label label2;
         private System.Windows.Forms.Timer timer2;
         private PictureBox pictureBox1;
+        private System.Windows.Forms.Timer meteorTimer;
     }
 }
