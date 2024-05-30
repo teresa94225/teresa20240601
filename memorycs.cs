@@ -24,7 +24,8 @@ namespace 日曆
             getset entry = new getset
             {
                 title = this.title.Text,
-                Memo = Memo.Text
+                Memo = Memo.Text,
+                Date = DateTime.Today // 记录当前日期，不包含时间
             };
 
             // 创建存储文件夹的路径
@@ -48,11 +49,12 @@ namespace 日曆
             // 提示用户保存成功
             MessageBox.Show("備忘錄儲存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            memoListBox.Items.Add(this.title.Text);
+            memoListBox.Items.Add($"{entry.title} ({entry.Date:yyyy-MM-dd})");
 
             this.title.Text = null;
             Memo.Text = null;
         }
+    
 
         public const string memoryfolder = "memory";
         private static void InitializeDiariesFolder()
@@ -107,8 +109,9 @@ namespace 日曆
                 var files = Directory.GetFiles(folderPath, "*.json");
                 foreach (var file in files)
                 {
-                    string fileName = Path.GetFileNameWithoutExtension(file);
-                    memoListBox.Items.Add(fileName);
+                    string json = File.ReadAllText(file);
+                    getset entry = JsonConvert.DeserializeObject<getset>(json);
+                    memoListBox.Items.Add($"{entry.title} ({entry.Date:yyyy-MM-dd})");
                 }
             }
         }

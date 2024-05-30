@@ -10,7 +10,7 @@ namespace 日曆
     {
         public string title { get; set; }
         public string Memo { get; set; }
-
+        public DateTime Date { get; set; } // 添加日期属性
         public override string ToString()
         {
 
