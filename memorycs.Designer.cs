@@ -20,6 +20,7 @@
             label1 = new Label();
             Memo = new TextBox();
             btnSave = new Button();
+            deletebutton3 = new Button();
             SuspendLayout();
             // 
             // memoListBox
@@ -65,20 +66,32 @@
             // btnSave
             // 
             btnSave.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnSave.Location = new Point(685, 542);
+            btnSave.Location = new Point(609, 542);
             btnSave.Margin = new Padding(4);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(112, 34);
             btnSave.TabIndex = 6;
-            btnSave.Text = "Save";
+            btnSave.Text = "儲存";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
+            // 
+            // deletebutton3
+            // 
+            deletebutton3.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            deletebutton3.Location = new Point(782, 544);
+            deletebutton3.Name = "deletebutton3";
+            deletebutton3.Size = new Size(112, 34);
+            deletebutton3.TabIndex = 7;
+            deletebutton3.Text = "刪除";
+            deletebutton3.UseVisualStyleBackColor = true;
+            deletebutton3.Click += deletebutton3_Click;
             // 
             // memorycs
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1046, 613);
+            Controls.Add(deletebutton3);
             Controls.Add(btnSave);
             Controls.Add(Memo);
             Controls.Add(label1);
@@ -97,5 +110,6 @@
         private Label label1;
         private TextBox Memo;
         private Button btnSave;
+        private Button deletebutton3;
     }
 }

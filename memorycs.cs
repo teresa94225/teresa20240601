@@ -112,5 +112,32 @@ namespace 日曆
                 }
             }
         }
+
+        private void deletebutton3_Click(object sender, EventArgs e)
+        {
+            if (memoListBox.SelectedItem != null)
+            {
+                string selectedTitle = memoListBox.SelectedItem.ToString();
+                string folderPath = Path.Combine(Environment.CurrentDirectory, "memory");
+                string filePath = Path.Combine(folderPath, selectedTitle + ".json");
+
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                    memoListBox.Items.Remove(selectedTitle);
+                    this.title.Text = "";
+                    Memo.Text = "";
+                    MessageBox.Show("備忘錄已刪除！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("File not found.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("請選擇要刪除的備忘錄。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }
