@@ -16,6 +16,7 @@ namespace 日曆
         public memorycs()
         {
             InitializeComponent();
+            memoListBox.DrawItem += memoListBox_DrawItem;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -54,7 +55,7 @@ namespace 日曆
             this.title.Text = null;
             Memo.Text = null;
         }
-    
+
 
         public const string memoryfolder = "memory";
         private static void InitializeDiariesFolder()
@@ -120,14 +121,17 @@ namespace 日曆
         {
             if (memoListBox.SelectedItem != null)
             {
-                string selectedTitle = memoListBox.SelectedItem.ToString();
+                // 从 ListBox 选择的项中提取标题，忽略日期部分
+                string selectedItem = memoListBox.SelectedItem.ToString();
+                string selectedTitle = selectedItem.Substring(0, selectedItem.LastIndexOf(" (")); // 去掉日期部分
+
                 string folderPath = Path.Combine(Environment.CurrentDirectory, "memory");
                 string filePath = Path.Combine(folderPath, selectedTitle + ".json");
 
                 if (File.Exists(filePath))
                 {
                     File.Delete(filePath);
-                    memoListBox.Items.Remove(selectedTitle);
+                    memoListBox.Items.Remove(selectedItem);
                     this.title.Text = "";
                     Memo.Text = "";
                     MessageBox.Show("備忘錄已刪除！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -145,38 +149,60 @@ namespace 日曆
 
         private void memoListBox_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0)
-                return;
+            if (e.Index < 0) return;
 
             // 获取当前项的文本
             string itemText = memoListBox.Items[e.Index].ToString();
 
-            // 分割标题和日期
-            int lastParenIndex = itemText.LastIndexOf(" (");
-            string title = itemText.Substring(0, lastParenIndex);
-            string date = itemText.Substring(lastParenIndex);
+            // 分离标题和日期
+            int indexOfDate = itemText.LastIndexOf(" (");
+            string title = itemText.Substring(0, indexOfDate);
+            string date = itemText.Substring(indexOfDate);
 
-            // 获取字体和颜色
+            // 绘制背景
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                e.Graphics.FillRectangle(Brushes.LightBlue, e.Bounds); // 选中的背景色
+            }
+            else
+            {
+                e.Graphics.FillRectangle(new SolidBrush(e.BackColor), e.Bounds); // 默认背景色
+            }
+
+            // 定义字体和颜色
             Font titleFont = e.Font;
-            Font dateFont = new Font(e.Font.FontFamily, e.Font.Size - 5); // 较小的字体
+            Font dateFont = new Font(e.Font.FontFamily, e.Font.Size - 4);
             Brush titleBrush = new SolidBrush(e.ForeColor);
-            Brush dateBrush = Brushes.Gray; // 灰色
+            Brush dateBrush = Brushes.Gray;
 
-            // 清除背景
-            e.DrawBackground();
-
-            // 计算标题和日期的大小
-            SizeF titleSize = e.Graphics.MeasureString(title, titleFont);
-            SizeF dateSize = e.Graphics.MeasureString(date, dateFont);
+            // 如果项被选中，则改变文字颜色和字体粗细
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                titleFont = new Font(e.Font, FontStyle.Bold);
+                dateFont = new Font(e.Font.FontFamily, e.Font.Size - 2, FontStyle.Bold);
+                titleBrush = new SolidBrush(Color.FromArgb(0, 121, 121)); // #007979
+                dateBrush = new SolidBrush(Color.FromArgb(0, 121, 121)); // #007979
+            }
 
             // 绘制标题
             e.Graphics.DrawString(title, titleFont, titleBrush, e.Bounds.X, e.Bounds.Y);
 
-            // 绘制日期
-            e.Graphics.DrawString(date, dateFont, dateBrush, e.Bounds.X + titleSize.Width, e.Bounds.Y + (e.Bounds.Height - dateSize.Height) / 2);
+            // 计算日期部分的绘制位置
+            SizeF titleSize = e.Graphics.MeasureString(title, titleFont);
+            float dateX = e.Bounds.X + titleSize.Width + 5; // 5 是间隔
+            float dateY = e.Bounds.Y;
 
-            // 绘制焦点矩形
+            // 绘制日期
+            e.Graphics.DrawString(date, dateFont, dateBrush, dateX, dateY);
+
+            // 绘制焦点矩形框
             e.DrawFocusRectangle();
+        }
+
+        private void addbutton_Click(object sender, EventArgs e)
+        {
+            title.Text = ""; // 清空标题文本框
+            Memo.Text = "";  // 清空备忘录文本框
         }
     }
 }
