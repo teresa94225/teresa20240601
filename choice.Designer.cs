@@ -78,7 +78,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // choice
             // 
@@ -90,7 +89,7 @@
             Controls.Add(accountingbutton);
             Controls.Add(diarybutton);
             Name = "choice";
-            Text = "choice";
+            Text = "服務項目";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

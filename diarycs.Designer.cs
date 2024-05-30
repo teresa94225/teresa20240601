@@ -130,7 +130,8 @@ namespace 日曆
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("微軟正黑體", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.Font = new Font("微軟正黑體", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = SystemColors.ControlText;
             label1.Location = new Point(1054, 47);
             label1.Name = "label1";
             label1.Size = new Size(77, 38);
@@ -176,7 +177,7 @@ namespace 日曆
             // addbutton
             // 
             addbutton.Font = new Font("Microsoft JhengHei UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            addbutton.Location = new Point(1301, 47);
+            addbutton.Location = new Point(1301, 70);
             addbutton.Name = "addbutton";
             addbutton.Size = new Size(43, 38);
             addbutton.TabIndex = 16;
@@ -271,9 +272,9 @@ namespace 日曆
             // colorbutton
             // 
             colorbutton.Font = new Font("Microsoft JhengHei UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            colorbutton.Location = new Point(1204, 43);
+            colorbutton.Location = new Point(1281, 16);
             colorbutton.Name = "colorbutton";
-            colorbutton.Size = new Size(82, 49);
+            colorbutton.Size = new Size(63, 34);
             colorbutton.TabIndex = 25;
             colorbutton.Text = "color";
             colorbutton.UseVisualStyleBackColor = true;
@@ -306,7 +307,7 @@ namespace 日曆
             Controls.Add(moodcomboBox);
             Controls.Add(dateTimePicker1);
             Name = "diarycs";
-            Text = "Diary";
+            Text = "日記";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();

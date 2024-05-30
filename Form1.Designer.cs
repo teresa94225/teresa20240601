@@ -89,7 +89,7 @@
             Controls.Add(memory);
             Controls.Add(monthCalendar1);
             Name = "Form1";
-            Text = "Form1";
+            Text = "日常應用程式";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
